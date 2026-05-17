@@ -1,0 +1,39 @@
+
+
+.tools-page {
+  min-height: 100vh;
+  background-color: #FAFAF7;
+  padding: 42px 7%;
+}
+
+.tools-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.tools-header h1 {
+  font-size: 38px;
+  margin: 0;
+  color: #4C3D6B;
+  letter-spacing: 1px;
+}
+
+.tools-header p {
+  color: #6D6E78;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 26px;
+}
+
+
+ .comments-section {
+  margin-top: 60px;
+  padding: 40px 10%;
+  background: #ffffff;
+  border-top: 1px solid #e8e1f1;
+}

@@ -1,0 +1,19 @@
+
+.share-comments-container {
+  padding: 20px 0;
+}
+
+.share-input {
+  border-radius: 16px !important;
+  padding: 16px !important;
+  border: 1px solid #E8E1F1 !important;
+  background-color: #FAFAF7 !important;
+  resize: none !important;
+  min-height: 120px;
+  color: #33363F !important;
+}
+
+.share-input:focus {
+  border-color: #A796C7 !important;
+  box-shadow: 0 0 0 3px rgba(167, 150, 199, 0.15) !important;
+}

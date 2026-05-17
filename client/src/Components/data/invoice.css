@@ -1,0 +1,80 @@
+.invoice-page {
+  min-height: 100vh;
+  background-color: #FAFAF7;
+  padding: 60px 8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invoice-card {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  border-radius: 30px;
+  padding: 50px;
+  box-shadow: 0 10px 40px rgba(76, 61, 107, 0.12);
+}
+
+.invoice-title {
+  color: #4C3D6B;
+  font-size: 42px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.invoice-subtitle {
+  text-align: center;
+  color: #6D6E78;
+  margin-bottom: 40px;
+}
+
+.invoice-section {
+  margin-bottom: 30px;
+}
+
+.invoice-section h3 {
+  color: #4C3D6B;
+  margin-bottom: 15px;
+}
+
+.invoice-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E8E1F1;
+}
+
+.invoice-label {
+  font-weight: 600;
+  color: #4C3D6B;
+}
+
+.invoice-value {
+  color: #33363F;
+}
+
+.invoice-total {
+  margin-top: 30px;
+  text-align: right;
+  font-size: 28px;
+  color: #7FAE7C;
+  font-weight: 700;
+}
+
+.invoice-message {
+  margin-top: 40px;
+  text-align: center;
+  color: #6D6E78;
+  line-height: 1.8;
+}
+
+.invoice-tool-image {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto 25px auto;
+}
