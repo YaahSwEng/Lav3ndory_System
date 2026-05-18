@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+//we need to make server URL variable and caal it from .env 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+
+
 
 const initialState = {
   user: {},
@@ -15,7 +19,7 @@ export const registerUser = createAsyncThunk(
   "users/registerUser",
   async (userData) => {
     try {
-      const response = await axios.post("http://localhost:3001/registerUser", {
+      /* const response = await axios.post("http://localhost:3001/registerUser", {
         name: userData.name,
         email: userData.email,
         phone: userData.phone,
@@ -23,6 +27,16 @@ export const registerUser = createAsyncThunk(
         ageCategory: userData.ageCategory,
         password: userData.password,
       });
+ */
+      const response = await axios.post(`${SERVER_URL}/registerUser`, {
+        name: userData.name,
+        email: userData.email,
+        phone: userData.phone,
+        gender: userData.gender,
+        ageCategory: userData.ageCategory,
+        password: userData.password,
+      });
+
 
       console.log(response);
 
@@ -41,10 +55,20 @@ export const login = createAsyncThunk("users/login", async (userData) => {
   try {
     // Sending a POST request to the backend server at "http://localhost:3001/login"
     // The request body contains the user's email and password
-    const response = await axios.post("http://localhost:3001/login", {
+
+
+    /*  const response = await axios.post("http://localhost:3001/login", {
+       email: userData.email,
+       password: userData.password,
+     }); */
+
+
+
+    const response = await axios.post(`${SERVER_URL}/login`, {
       email: userData.email,
       password: userData.password,
     });
+
 
     // Extracting the user data from the server's response (e.g., the authenticated user)
     const user = response.data.user;
@@ -67,11 +91,19 @@ export const login = createAsyncThunk("users/login", async (userData) => {
 
 // --- Creating a Thunk for Logging Out a User ---
 // This thunk handles user logout
+
+
 export const logout = createAsyncThunk("users/logout", async () => {
   try {
     // Sending a POST request to the backend server at "http://localhost:3001/logout"
     // This might clear a session or token on the server
-    const response = await axios.post("http://localhost:3001/logout");
+
+
+    /*  const response = await axios.post("http://localhost:3001/logout"); */
+
+    const response = await axios.post(`${SERVER_URL}/logout`);
+
+
     // Note: The response isn't used here, but you could return data if needed
   } catch (error) {
     // Log any errors for debugging
@@ -110,13 +142,19 @@ export const updateUserProfile = createAsyncThunk(
 
       }
 
-      const response = await axios.put(
+      const response = /* await axios.put(
 
         `http://localhost:3001/updateUserProfile/${userData.email}`,
 
         formData
 
-      );
+      ); */
+
+
+        await axios.put(
+          `${SERVER_URL}/updateUserProfile/${userData.email}`,
+          formData
+        );
 
       const user = response.data.user;
 
@@ -142,7 +180,10 @@ export const getUsers = createAsyncThunk(
 
     try {
 
-      const response = await axios.get("http://localhost:3001/getUsers");
+     /*  const response = await axios.get("http://localhost:3001/getUsers"); */
+
+     const response = await axios.get(`${SERVER_URL}/getUsers`);
+
 
       return response.data.users;
 
@@ -168,7 +209,9 @@ export const deleteUser = createAsyncThunk(
 
     try {
 
-      await axios.delete(`http://localhost:3001/deleteUser/${email}`);
+      /* await axios.delete(`http://localhost:3001/deleteUser/${email}`); */
+
+      await axios.delete(`${SERVER_URL}/deleteUser/${email}`);
 
       return email;
 

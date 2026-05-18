@@ -6,6 +6,11 @@ import mongoose from "mongoose";
 // 'cors' allows our frontend (like a React app) to talk to our backend server without security issues
 import cors from "cors";
 
+
+//open server/index.js and import config.js file which will let the Node.js file read from .env 
+import * as ENV from "./config.js";
+
+
 // Importing the UserModel, which defines the structure of a user in our database (like a blueprint)
 import UserModel from "./Models/UserModel.js";
 // ToolsModel
@@ -48,14 +53,26 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Database connection string
-const connectString =
+/* const connectString =
   "mongodb://admin:admin123@ac-u7urkzj-shard-00-00.dkevhlv.mongodb.net:27017,ac-u7urkzj-shard-00-01.dkevhlv.mongodb.net:27017,ac-u7urkzj-shard-00-02.dkevhlv.mongodb.net:27017/Lav3ndoryDb?ssl=true&replicaSet=atlas-190pfr-shard-0&authSource=admin&appName=Lav3ndoryCluster";
+ */
+//Database connection string by calling it from .env
+// Database connection string from .env file
+const connectString = ENV.MONGO_URI;
 
 // The server listens on port 3001 (you can access it at http://localhost:3001)
-app.listen(3001, () => {
+/* app.listen(3001, () => {
   // This message appears in the terminal when the server starts successfully
   console.log("You are connected to web server");
 });
+ */
+// The server listens using environment variable port
+const port = ENV.PORT || 3001;
+
+app.listen(port, () => {
+  console.log("You are connected to web server");
+});
+
 // Connecting to the MongoDB database using mongoose
 mongoose.connect(connectString).then(() => {
   console.log("Web Server connected to mongodb");

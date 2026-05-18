@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+//we need to make server URL variable and caal it from .env 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+
+
 const initialState = {
     tools: [],
     tool: {},
@@ -19,7 +23,9 @@ export const getTools = createAsyncThunk(
 
         try {
 
-            const response = await axios.get("http://localhost:3001/getTools");
+            /* const response = await axios.get("http://localhost:3001/getTools"); */
+
+            const response = await axios.get(`${SERVER_URL}/getTools`);
 
             return response.data.tools;
 
@@ -54,8 +60,14 @@ export const addTool = createAsyncThunk(
                 formData.append("image", toolData.image);
             }
 
-            const response = await axios.post(
+            /* const response = await axios.post(
                 "http://localhost:3001/addTool",
+                formData
+            );
+ */
+
+            const response = await axios.post(
+                `${SERVER_URL}/addTool`,
                 formData
             );
 
@@ -78,7 +90,9 @@ export const deleteTool = createAsyncThunk(
 
         try {
 
-            await axios.delete(`http://localhost:3001/deleteTool/${toolid}`);
+            /* await axios.delete(`http://localhost:3001/deleteTool/${toolid}`); */
+
+            await axios.delete(`${SERVER_URL}/deleteTool/${toolid}`);
 
             return toolid;
 
@@ -125,9 +139,19 @@ export const updateTool = createAsyncThunk(
 
             }
 
+            /*  const response = await axios.put(
+ 
+                 `http://localhost:3001/updateTool/${toolData.toolid}`,
+ 
+                 formData
+ 
+             ); */
+
+
+
             const response = await axios.put(
 
-                `http://localhost:3001/updateTool/${toolData.toolid}`,
+                `${SERVER_URL}/updateTool/${toolData.toolid}`,
 
                 formData
 
@@ -152,26 +176,33 @@ export const updateTool = createAsyncThunk(
 
 //likes
 export const toggleLike = createAsyncThunk(
-  "tools/toggleLike",
-  async ({ id, email }) => {
- 
-    try {
- 
-      const response = await axios.put(
-        `http://localhost:3001/toggleLike/${id}`,
-        { email }
-      );
- 
-      return response.data.tool;
- 
-    } catch (error) {
- 
-      console.log(error);
- 
-      throw new Error("Like failed");
- 
+    "tools/toggleLike",
+    async ({ id, email }) => {
+
+        try {
+
+            /* const response = await axios.put(
+                `http://localhost:3001/toggleLike/${id}`,
+                { email }
+            );
+ */
+
+            const response = await axios.put(
+               `${SERVER_URL}/toggleLike/${id}`,
+                { email }
+            );
+
+
+            return response.data.tool;
+
+        } catch (error) {
+
+            console.log(error);
+
+            throw new Error("Like failed");
+
+        }
     }
-  }
 );
 
 
@@ -265,7 +296,7 @@ export const toolSlice = createSlice({
             }
 
         });
- 
+
 
 
 
