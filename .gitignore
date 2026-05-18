@@ -28,3 +28,5 @@ yarn-error.log*
 server/uploads/*.png
 server/uploads/*.jpg
 server/uploads/*.jpeg
+!server/uploads/.gitkeep
+ 
