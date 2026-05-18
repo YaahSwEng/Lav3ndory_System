@@ -1,33 +1,96 @@
 import React, { useState, useEffect } from "react";
+
 import axios from "axios";
+
 const Location = () => {
-  const [locationData, setLocationData] = useState(null);
+
+  const [ip, setIp] = useState(null);
+
+  const [geoData, setGeoData] = useState(null);
+
+  const API_KEY = process.env.REACT_APP_IPIFY_API_KEY;
+
+  // fetch IP
+
+  const fetchIpAddress = async () => {
+
+    try {
+
+      const response = await axios.get(
+
+        "https://api.ipify.org?format=json"
+
+      );
+
+      setIp(response.data.ip);
+
+    } catch (error) {
+
+      console.error("Error fetching IP:", error.message);
+
+    }
+
+  };
+
+  // fetch location
+
+  const getGeoLocationData = async () => {
+
+    if (!ip) return;
+
+    try {
+
+      const response = await axios.get(
+
+        `https://geo.ipify.org/api/v2/country?apiKey=${API_KEY}&ipAddress=${ip}`
+
+      );
+
+      setGeoData(response.data);
+
+    } catch (error) {
+
+      console.error("Error fetching location:", error.message);
+
+    }
+
+  };
+
   useEffect(() => {
-    const fetchLocation = async () => {
-      try {
-        const response = await axios.get("http://ip-api.com/json/");
-        setLocationData(response.data);
-      } catch (error) {
-        console.error("Error fetching location data:", error.message);
-      }
-    };
-    fetchLocation();
+
+    fetchIpAddress();
+
   }, []);
+
+  useEffect(() => {
+
+    if (ip) {
+
+      getGeoLocationData();
+
+    }
+
+  }, [ip]);
+
   return (
     <div className="location">
-      <br />
-      {locationData ? (
+
+      {ip ? <p>IP: {ip}</p> : <p>Loading IP...</p>}
+
+      {geoData ? (
         <div>
-          <span>IP: {locationData.query}</span>
-          <br />
-          <span>City: {locationData.city}</span>
-          <br />
-          <span>Country: {locationData.country}</span>
+          <p>Country: {geoData.location.country}</p>
+          <p>Region: {geoData.location.region}</p>
         </div>
+
       ) : (
         <p>Loading location...</p>
+
       )}
     </div>
+
   );
+
 };
+
 export default Location;
