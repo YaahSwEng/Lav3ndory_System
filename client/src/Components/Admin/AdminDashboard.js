@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 const AdminDashboard = () => {
   const navigate = useNavigate();
   //to put the count of users and tools 
+  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const [usersCount, setUsersCount] = useState(0);
 
   const [toolsCount, setToolsCount] = useState(0);
@@ -20,9 +21,10 @@ const AdminDashboard = () => {
 
       try {
 
-        const usersResponse = await axios.get("http://localhost:3001/usersCount");
+        const usersResponse = await axios.get(`${SERVER_URL}/usersCount`);
+;
 
-        const toolsResponse = await axios.get("http://localhost:3001/toolsCount");
+        const toolsResponse = await axios.get(`${SERVER_URL}/toolsCount`);
 
         setUsersCount(usersResponse.data.count);
 
