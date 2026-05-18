@@ -20,9 +20,13 @@ const ToolCard = ({ tool }) => {
     <div className="tool-card">
       <div className="tool-img-box">
         <img
-          src={`http://localhost:3001/uploads/${tool.image}`}
+
+          src={`${process.env.REACT_APP_SERVER_URL}/uploads/${tool.image}`}
+
           alt={tool.toolname}
+
         />
+
         <span className="heart" onClick={() => dispatch(
           toggleLike({
             id: tool._id, email: user.email,

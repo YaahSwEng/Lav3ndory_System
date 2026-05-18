@@ -12,7 +12,7 @@ const User = () => {
 
   // Build full image URL
   const picURL = profilePic
-    ? "http://localhost:3001/uploads/" + profilePic
+    ? `${process.env.REACT_APP_SERVER_URL}/uploads/${profilePic}`
     : null;
   return (
     <div>
