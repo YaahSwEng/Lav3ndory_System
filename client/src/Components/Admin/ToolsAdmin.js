@@ -85,7 +85,7 @@ const ToolsAdmin = () => {
                             <div className="tool-img-box">
                                 <img
 
-                                    src={`http://localhost:3001/uploads/${tool.image}`}
+                                   src={`https://lav3ndory-system-1.onrender.com/uploads/${tool.image}`}
 
                                     alt={tool.toolname}
 
