@@ -17,7 +17,7 @@ import UserModel from "./Models/UserModel.js";
 import ToolModel from "./Models/ToolModel.js";
 //CommentsModel
 import CommentModel from "./Models/CommentModel.js";
- 
+
 
 // 'bcrypt' is a library used to securely hash (encrypt) passwords so they aren't stored as plain text
 import bcrypt from "bcrypt";
@@ -25,6 +25,16 @@ import bcrypt from "bcrypt";
 //img things 
 import multer from "multer";
 import path from "path";
+
+
+import fs from "fs";
+
+if (!fs.existsSync("uploads")) {
+
+  fs.mkdirSync("uploads");
+
+}
+
 
 
 
